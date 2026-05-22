@@ -15,7 +15,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## project Structure
+## project structure
 
 ```
 ├── app.py              # main streamlit app (all UI + backend calls)
@@ -87,7 +87,7 @@ and ready — just replace the `simulate_velocity_field()` call to use `cfd_file
 
 ---
 
-## pdf Export
+## pdf export
 
 PDF generation uses `reportlab`. The report includes:
 - full run parameters
