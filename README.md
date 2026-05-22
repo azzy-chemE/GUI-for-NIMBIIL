@@ -15,7 +15,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## 📁 Project Structure
+## project Structure
 
 ```
 ├── app.py              # main streamlit app (all UI + backend calls)
