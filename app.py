@@ -62,6 +62,14 @@ st.markdown("""
   [data-testid="stSidebar"] .stTextArea textarea,
   [data-testid="stSidebar"] .stTextArea textarea::placeholder { color: #DDE9E7 !important; }
 
+  [data-testid="stSidebar"] .stSelectbox,
+  [data-testid="stSidebar"] .stSelectbox *,
+  [data-testid="stSidebar"] .stMultiselect,
+  [data-testid="stSidebar"] .stMultiselect * { color: #DDE9E7 !important; }
+
+  [data-testid="stSidebar"] .stSelectbox div[role="button"] span,
+  [data-testid="stSidebar"] .stMultiselect div[role="button"] span { color: #DDE9E7 !important; }
+
   /* main area */
   .main { background: var(--cream); }
   .block-container { padding: 2rem 2.5rem !important; }
