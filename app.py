@@ -61,7 +61,8 @@ st.markdown("""
   [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] * { color: #223C4E !important; }
   [data-testid="stSidebar"] input[type="number"] { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] svg { fill: #83848c !important; }
-  [data-testid="stSidebar"] [data-testid="stExpanderDetails"] { background-color: transparent !important; color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] [data-testid="stExpanderDetails"] { color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] [data-testid="stExpanderDetails"] > div { background-color: var(--navy) !important; }
   
   /* main area */
   .main { background: var(--cream); }
