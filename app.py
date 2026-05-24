@@ -55,6 +55,13 @@ st.markdown("""
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
   [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #A8C8C3 !important; }
 
+  [data-testid="stSidebar"] .stTextInput input,
+  [data-testid="stSidebar"] .stTextInput input::placeholder,
+  [data-testid="stSidebar"] .stNumberInput input,
+  [data-testid="stSidebar"] .stNumberInput input::placeholder,
+  [data-testid="stSidebar"] .stTextArea textarea,
+  [data-testid="stSidebar"] .stTextArea textarea::placeholder { color: #DDE9E7 !important; }
+
   /* main area */
   .main { background: var(--cream); }
   .block-container { padding: 2rem 2.5rem !important; }
