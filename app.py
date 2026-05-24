@@ -55,6 +55,15 @@ st.markdown("""
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
   [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #A8C8C3 !important; }
 
+  [data-testid="stSidebar"] [data-baseweb="select"] > div,
+  [data-testid="stSidebar"] [data-baseweb="input"],
+  [data-testid="stSidebar"] [data-baseweb="stNumberInput"] input { background-color: #0D2137 !important; border-color: #C8DAD7 !important; color: #0D2137 !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] span,
+  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] {color: #0D2137 !important; }
+  [data-testid="stSidebar"] input[type="number"] { background color: #DDE9E7 !important; color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] svg { fill: #83848c !important; }
+  [data-testid="stSidebar"] [data-baseweb="stNumberInput"] button { background-color: #0D2137 !important; border-color: #C8DAD7 !important; color: #0D2137 !important; }
+
   /* main area */
   .main { background: var(--cream); }
   .block-container { padding: 2rem 2.5rem !important; }
@@ -672,10 +681,11 @@ with tab_kinetics:
         add_line(fig, t, df["titer_mg_L"],               "Titer",        orange, 3, 2)
 
         fig.update_layout(
-            height=700, font_family="DM Sans", font = dict(size = 11),
+            height=700, font_family="DM Sans", 
             paper_bgcolor="white", plot_bgcolor="#F8FBFA",
-            title_text="Cell Culture Kinetics — Time Profiles", title_font = dict(size = 18)
+            title_text="Cell Culture Kinetics — Time Profiles", margin = dict(l = 60, r = 20, t = 120, b = 60)
         )
+        
         for i in fig.layout.annotations:
             i.font.family = "DM Sans"
         fig.update_xaxes(title_text="Time (hr)")
