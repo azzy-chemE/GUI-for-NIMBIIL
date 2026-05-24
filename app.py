@@ -45,11 +45,11 @@ st.markdown("""
     background: var(--navy) !important;
     border-right: 2px solid var(--teal);
   }
-  [data-testid="stSidebar"] * { color: #223C4E !important; }
+  [data-testid="stSidebar"] * { color: #DDE9E7 !important; }
   [data-testid="stSidebar"] .stSelectbox label,
   [data-testid="stSidebar"] .stNumberInput label,
   [data-testid="stSidebar"] .stTextInput label,
-  [data-testid="stSidebar"] .stFileUploader label { color: #A8C8C3 !important; font-size: 0.78rem !important; letter-spacing: 0.04em; text-transform: uppercase; }
+  [data-testid="stSidebar"] .stFileUploader label { color: #223C4E !important; font-size: 0.78rem !important; letter-spacing: 0.04em; text-transform: uppercase; }
   [data-testid="stSidebar"] h1 { font-family: 'DM Serif Display', serif; color: #E8F4F2 !important; font-size: 1.4rem !important; }
   [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: var(--teal-lt) !important; }
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
