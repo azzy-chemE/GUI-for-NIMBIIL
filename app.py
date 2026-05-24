@@ -55,21 +55,6 @@ st.markdown("""
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
   [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #A8C8C3 !important; }
 
-  [data-testid="stSidebar"] .stTextInput input,
-  [data-testid="stSidebar"] .stTextInput input::placeholder,
-  [data-testid="stSidebar"] .stNumberInput input,
-  [data-testid="stSidebar"] .stNumberInput input::placeholder,
-  [data-testid="stSidebar"] .stTextArea textarea,
-  [data-testid="stSidebar"] .stTextArea textarea::placeholder { color: #DDE9E7 !important; }
-
-  [data-testid="stSidebar"] .stSelectbox,
-  [data-testid="stSidebar"] .stSelectbox *,
-  [data-testid="stSidebar"] .stMultiselect,
-  [data-testid="stSidebar"] .stMultiselect * { color: #DDE9E7 !important; }
-
-  [data-testid="stSidebar"] .stSelectbox div[role="button"] span,
-  [data-testid="stSidebar"] .stMultiselect div[role="button"] span { color: #DDE9E7 !important; }
-
   /* main area */
   .main { background: var(--cream); }
   .block-container { padding: 2rem 2.5rem !important; }
@@ -671,7 +656,7 @@ with tab_kinetics:
             subplot_titles=("Cell density (×10⁶/mL)", "Viability (%)",
                             "Glucose (mM)", "Lactate (mM)",
                             "DO (% sat)", "Titer (mg/L)"),
-            vertical_spacing=0.1, horizontal_spacing=0.08,
+            vertical_spacing=0.15, horizontal_spacing=0.1,
         )
 
         def add_line(fig, x, y, name, color, row, col):
@@ -687,7 +672,7 @@ with tab_kinetics:
         add_line(fig, t, df["titer_mg_L"],               "Titer",        orange, 3, 2)
 
         fig.update_layout(
-            height=650, font_family="DM Sans",
+            height=700, font_family="DM Sans",
             paper_bgcolor="white", plot_bgcolor="#F8FBFA",
             title_text="Cell Culture Kinetics — Time Profiles",
         )
