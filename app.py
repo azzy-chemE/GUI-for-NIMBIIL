@@ -672,9 +672,9 @@ with tab_kinetics:
         add_line(fig, t, df["titer_mg_L"],               "Titer",        orange, 3, 2)
 
         fig.update_layout(
-            height=700, font_family="DM Sans",
+            height=700, font_family="DM Sans", font = dict(size = 11),
             paper_bgcolor="white", plot_bgcolor="#F8FBFA",
-            title_text="Cell Culture Kinetics — Time Profiles",
+            title_text="Cell Culture Kinetics — Time Profiles", title_font = dict(size = 18)
         )
         for i in fig.layout.annotations:
             i.font.family = "DM Sans"
