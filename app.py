@@ -57,12 +57,13 @@ st.markdown("""
 
   [data-testid="stSidebar"] [data-baseweb="select"] > div,
   [data-testid="stSidebar"] [data-baseweb="input"],
-  [data-testid="stSidebar"] [data-baseweb="stNumberInput"] input { background-color: #0D2137 !important; border-color: #C8DAD7 !important; color: #0D2137 !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] span,
-  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] {color: #0D2137 !important; }
-  [data-testid="stSidebar"] input[type="number"] { background color: #DDE9E7 !important; color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"],
+  [data-testid="stSidebar"] input[type="number"], 
+  [data-testid="stSidebar"] input[type="text"],
+  [data-testid="stSidebar"] textarea { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] svg { fill: #83848c !important; }
-  [data-testid="stSidebar"] [data-baseweb="stNumberInput"] button { background-color: #0D2137 !important; border-color: #C8DAD7 !important; color: #0D2137 !important; }
+  [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #223C4E !important; }
 
   /* main area */
   .main { background: var(--cream); }
@@ -665,7 +666,7 @@ with tab_kinetics:
             subplot_titles=("Cell density (×10⁶/mL)", "Viability (%)",
                             "Glucose (mM)", "Lactate (mM)",
                             "DO (% sat)", "Titer (mg/L)"),
-            vertical_spacing=0.15, horizontal_spacing=0.1,
+            vertical_spacing=0.2, horizontal_spacing=0.1,
         )
 
         def add_line(fig, x, y, name, color, row, col):
@@ -681,9 +682,9 @@ with tab_kinetics:
         add_line(fig, t, df["titer_mg_L"],               "Titer",        orange, 3, 2)
 
         fig.update_layout(
-            height=700, font_family="DM Sans", 
+            height=800, font_family="DM Sans", 
             paper_bgcolor="white", plot_bgcolor="#F8FBFA",
-            title_text="Cell Culture Kinetics — Time Profiles", margin = dict(l = 60, r = 20, t = 120, b = 60)
+            title_text="Cell Culture Kinetics — Time Profiles"
         )
         
         for i in fig.layout.annotations:
