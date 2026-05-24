@@ -45,7 +45,7 @@ st.markdown("""
     background: var(--navy) !important;
     border-right: 2px solid var(--teal);
   }
-  [data-testid="stSidebar"] * { color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] * { color: #223C4E !important; }
   [data-testid="stSidebar"] .stSelectbox label,
   [data-testid="stSidebar"] .stNumberInput label,
   [data-testid="stSidebar"] .stTextInput label,
