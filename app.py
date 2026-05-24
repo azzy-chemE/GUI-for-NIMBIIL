@@ -53,7 +53,7 @@ st.markdown("""
   [data-testid="stSidebar"] h1 { font-family: 'DM Serif Display', serif; color: #E8F4F2; font-size: 1.4rem !important; }
   [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: var(--teal-lt) !important; }
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
-  [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { background-color: var(--navy) !important; color: #A8C8C3 !important; }
+  [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #A8C8C3 !important; }
 
   [data-testid="stSidebar"] [data-baseweb="select"] > div { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] input,
@@ -62,6 +62,8 @@ st.markdown("""
   [data-testid="stSidebar"] input[type="number"] { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] svg { fill: #83848c !important; }
   [data-testid="stSidebar"] [data-testid="stExpanderDetails"] { color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] details { background-color: var(--navy) !important; }
+  [data-testid="stSidebar"] summary { background-color: var(--navy) !important; }
   
   /* main area */
   .main { background: var(--cream); }
