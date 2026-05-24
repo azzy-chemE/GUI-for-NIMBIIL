@@ -55,15 +55,13 @@ st.markdown("""
   [data-testid="stSidebar"] .stExpander { border: 1px solid #1E3A4A !important; border-radius: 6px; margin-bottom: 8px; }
   [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #A8C8C3 !important; }
 
-  [data-testid="stSidebar"] [data-baseweb="select"] > div,
-  [data-testid="stSidebar"] [data-baseweb="input"],
+  [data-testid="stSidebar"] [data-baseweb="select"] > div { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] input,
   [data-testid="stSidebar"] [data-baseweb="select"] span,
-  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"],
-  [data-testid="stSidebar"] input[type="number"], 
-  [data-testid="stSidebar"] input[type="text"],
-  [data-testid="stSidebar"] textarea { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] * { color: #DDE9E7 !important; }
+  [data-testid="stSidebar"] input[type="number"] { background-color: #FFFFFF !important; border-color: #C8DAD7 !important; color: #223C4E !important; }
   [data-testid="stSidebar"] [data-baseweb="select"] svg { fill: #83848c !important; }
-  [data-testid="stSidebar"] [data-testid="stExpanderToggle"] { color: #223C4E !important; }
+  [data-testid="stSidebar"] [data-testid="stExpanderToggle"] p { color: #223C4E !important; }
 
   /* main area */
   .main { background: var(--cream); }
@@ -689,6 +687,8 @@ with tab_kinetics:
         
         for i in fig.layout.annotations:
             i.font.family = "DM Sans"
+            i.yanchor = "bottom"
+            i.y = i.y + 0.02
         fig.update_xaxes(title_text="Time (hr)")
         st.plotly_chart(fig, use_container_width=True)
 
