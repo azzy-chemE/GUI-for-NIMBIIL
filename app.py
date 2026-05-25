@@ -64,6 +64,9 @@ st.markdown("""
   [data-testid="stSidebar"] [data-testid="stExpanderDetails"] { color: #DDE9E7 !important; }
   [data-testid="stSidebar"] details { background-color: var(--navy) !important; }
   [data-testid="stSidebar"] summary { background-color: var(--navy) !important; }
+
+  [data-testid="stSidebar"] .stSlider label { color: #A8C8C3 !important; }
+  [data-testid="stSidebar"] .stCheckbox label { color: #A8C8C3 !important; }
   
   /* main area */
   .main { background: var(--cream); }
@@ -193,6 +196,10 @@ with st.sidebar:
 
     # ── 4. Sparger ────────────────────────────────────────
     with st.expander("④ Sparger", expanded=False):
+        sparger_type = st.selectbox(
+            "Sparger Type",
+            ["Drilled-hole", "Macroporous", "Microporous", "T-shaped"],
+        )
         sparger_diameter = st.number_input("Sparger diameter (m)", min_value=0.01, value=0.1, step=0.01, format="%.3f")
         air_flow_vvm = st.number_input("Air flow rate (vvm)", min_value=0.0, value=0.1, step=0.01, format="%.3f")
 
@@ -206,15 +213,15 @@ with st.sidebar:
         start_vol_frac = st.slider("Starting volume fraction (%)", 0, 100, 30)
         end_vol_frac = st.slider("End volume fraction (%)", 0, 100, 80)
 
-    # ── 6. Cell & Media Specs ─────────────────────────────
-    with st.expander("⑥ Cell & Media Specs", expanded=False):
+    # ── 6. Cell & Media Specifications ─────────────────────────────
+    with st.expander("⑥ Cell & Media Specifications", expanded=False):
         molar_volume_pg = st.number_input("Molar volume (pg/cell)", min_value=0.0, value=2.0, step=0.1)
         number_density = st.number_input("Number density (mol/m³)", min_value=0.0, value=1e6, step=1e5, format="%.0f")
         media_viscosity = st.number_input("Media viscosity (mPa·s)", min_value=0.1, value=1.0, step=0.1)
         pluronic_present = st.checkbox("Pluronic present?", value=False)
         antifoam_present = st.checkbox("Antifoam present?", value=True)
         st.caption("Upload cell-specific parameters:")
-        cell_params_file = st.file_uploader("Cell params (.xlsx)", type=["xlsx"], key="cell_params")
+        cell_params_file = st.file_uploader("Cell Parameters (.xlsx)", type=["xlsx"], key="cell_params")
         media_comp_file = st.file_uploader("Media composition (.xlsx)", type=["xlsx"], key="media_comp")
 
     # ── 7. Simulation Settings ────────────────────────────
