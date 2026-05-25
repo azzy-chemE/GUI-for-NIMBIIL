@@ -3,7 +3,9 @@ NIIMBL Bioreactor Digital Twin GUI
 Run: streamlit run app.py
 """
 
-# Comments are sprinkled throughout the script to explain context and usage of certain functions and what calculations are for, but I have not defined generally known functions or structures in Python, which can be consulted/found independently using external sources.
+# Comments are sprinkled throughout the script to explain context and usage of certain functions
+# and what calculations are for, but I have not defined generally known functions or structures
+# in Python, which can be consulted/found independently using external sources.
 
 import streamlit as st
 import numpy as np
