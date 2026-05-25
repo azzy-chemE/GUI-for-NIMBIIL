@@ -66,7 +66,9 @@ st.markdown("""
   [data-testid="stSidebar"] summary { background-color: var(--navy) !important; }
 
   [data-testid="stSidebar"] .stSlider label { color: #A8C8C3 !important; }
-  [data-testid="stSidebar"] .stCheckbox label { color: #A8C8C3 !important; }
+  [data-testid="stSidebar"] .stCheckbox label,
+  [data-testid="stSidebar"] .stCheckbox label p,
+  [data-testid="stSidebar"] .stCheckbox span { color: #A8C8C3 !important; }
   
   /* main area */
   .main { background: var(--cream); }
