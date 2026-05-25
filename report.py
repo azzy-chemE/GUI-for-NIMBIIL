@@ -7,6 +7,10 @@ Once you have real simulation data, you can embed Plotly figures as images
 using plotly.io.write_image + kaleido, then insert into the PDF.
 """
 
+# Comments are sprinkled throughout the script to explain context and usage of certain functions
+# and what calculations are for, but I have not defined generally known functions or structures
+# in Python, which can be consulted/found independently using external sources.
+
 import io
 from datetime import datetime
 import pandas as pd
