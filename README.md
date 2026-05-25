@@ -1,5 +1,7 @@
 ## niimbl bioreactor digital twin // gui
 
+by azzy xiang & ashley torralba | ohio state university | william g. lowrie department of chemical and biomolecular engineering
+
 streamlit-based GUI for the NIIMBL bioreactor compartment model.  
 
 covers
