@@ -253,7 +253,7 @@ st.markdown("""
 <div class="page-header">
   <div>
     <h1>Bioreactor Digital Twin</h1>
-    <p>NIIMBL · Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation</p>
+    <p>By Azzy Xiang and Ashley Torralba · Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation</p>
   </div>
 </div>
 """, unsafe_allow_html=True)
