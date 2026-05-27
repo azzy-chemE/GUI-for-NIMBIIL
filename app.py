@@ -166,7 +166,7 @@ st.markdown("""
 #  SIDEBAR  — all inputs
 # ══════════════════════════════════════════════════════════
 with st.sidebar:
-    st.image("NUMBIIL.png", use_container_width = True)
+    st.image("NIIMBL.png", use_container_width = True)
     st.markdown("## 🧬 NIIMBL Digital Twin")
     st.caption("Bioreactor Simulation · v1.0")
     st.divider()
@@ -283,9 +283,6 @@ st.markdown("""
   <div>
     <h1>Bioreactor Digital Twin</h1>
     <p>By Azzy Xiang and Ashley Torralba · Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation</p>
-  </div>
-  <div style = "margin-left: auto;">
-    <img scr = "app/static/NIMBIIL.png" style = "height: 80x; object-fit: contain;">
   </div>
 </div>
 """, unsafe_allow_html=True)
