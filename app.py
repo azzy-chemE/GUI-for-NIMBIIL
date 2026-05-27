@@ -166,6 +166,7 @@ st.markdown("""
 #  SIDEBAR  — all inputs
 # ══════════════════════════════════════════════════════════
 with st.sidebar:
+    st.image("NUMBIIL.png", use_container_width = True)
     st.markdown("## 🧬 NIIMBL Digital Twin")
     st.caption("Bioreactor Simulation · v1.0")
     st.divider()
@@ -174,7 +175,7 @@ with st.sidebar:
     with st.expander("① Reactor Mode", expanded=True):
         reactor_type = st.selectbox(
             "Reactor type",
-            ["Stirred Tank Reactor (STR)", "Single-use STR", "Plug Flow Reactor (PFR)", "Custom"],
+            ["Cytiva XCellerex (XDR)®", "Sartorius Flexsafe STR bags®", "Sartorius Ambr Reactors®"],
         )
         culture_mode = st.selectbox(
             "Culture mode",
@@ -196,7 +197,35 @@ with st.sidebar:
     with st.expander("③ Impeller", expanded=False):
         impeller_diameter = st.number_input("Impeller diameter (m)", min_value=0.05, value=0.6, step=0.05, format="%.2f")
         n_impellers = st.number_input("No. of impellers", min_value=1, value=2, step=1)
-        impeller_position = st.number_input("Impeller position – z (m)", min_value=0.0, value=0.5, step=0.05, format="%.2f")
+
+        st.caption("Impeller z-positions (m):")
+        impeller_positions = []
+        for i in range(int(n_impellers)):
+            z_position = st.number_input(f"Impeller {i + 1} - z (m)", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}")
+            impeller_positions.append(z_position)
+
+        off_center = st.checkbox("Off-center mounting?", value = False)
+        if off_center:
+            st.caption("Rotation axis direction (unit vector):")
+            r1, r2, r3 = st.columns(3)
+            with r1:
+                rotation_axis_x = st.number_input("x", value = 0.0, step = 0.1, format = "%.2f", key = "rot_axis_x")
+            with r2:
+                rotation_axis_y = st.number_input("y", value = 0.0, step = 0.1, format = "%.2f", key = "rot_axis_y")
+            with r3:
+                rotation_axis_z = st.number_input("z", value = 1.0, step = 0.1, format = "%.2f", key = "rot_axis_z")
+            st.caption("Rotation axis base point (m):")
+            bp1, bp2, bp3 = st.columns(3)
+            with bp1:
+                base_point_x = st.number_input("x", value = 0.0, step = 0.05, format = "%.2f", key = "base_x")
+            with bp2:
+                base_point_y = st.number_input("y", value = 0.0, step = 0.05, format = "%.2f", key = "base_y")
+            with bp3:
+                base_point_z = st.number_input("z", value = 0.0, step = 0.05, format = "%.2f", key = "base_z")
+        else:
+            rotation_axis_x, rotation_axis_y, rotation_axis_z = 0.0, 0.0, 1.0
+            base_point_x, base_point_y, base_point_z = 0.0, 0.0, 0.0
+        
         power_number = st.number_input("Power number (Np)", min_value=0.1, value=5.0, step=0.1, format="%.1f")
         agitation_rpm = st.number_input("Agitation speed (rpm)", min_value=0.0, value=80.0, step=5.0)
 
@@ -254,6 +283,9 @@ st.markdown("""
   <div>
     <h1>Bioreactor Digital Twin</h1>
     <p>By Azzy Xiang and Ashley Torralba · Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation</p>
+  </div>
+  <div style = "margin-left: auto;">
+    <img scr = "app/static/NIMBIIL.png" style = "height: 80x; object-fit: contain;">
   </div>
 </div>
 """, unsafe_allow_html=True)
