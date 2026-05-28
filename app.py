@@ -166,6 +166,7 @@ st.markdown("""
 #  SIDEBAR  — all inputs
 # ══════════════════════════════════════════════════════════
 with st.sidebar:
+    st.image("NIIMBL (without text).png", use_container_width = True)
     st.markdown("## 🧬 NIIMBL Digital Twin")
     st.caption("Bioreactor Simulation · v1.0")
     st.divider()
