@@ -167,8 +167,8 @@ st.markdown("""
 # ══════════════════════════════════════════════════════════
 with st.sidebar:
     st.image("NIIMBL (without text).png", use_container_width = True)
-    st.markdown("## 🧬 NIIMBL Digital Twin")
-    st.caption("Bioreactor Simulation · v1.0")
+    st.markdown("## Bioreactor Simulation")
+    st.caption("v1.0 · Alexa Q. Xiang ("Azzy") & Ashley Torralba © 2026")
     st.divider()
 
     # ── 1. Reactor Mode ──────────────────────────────────
@@ -282,7 +282,7 @@ st.markdown("""
 <div class="page-header">
   <div>
     <h1>Bioreactor Digital Twin</h1>
-    <p>By Azzy Xiang and Ashley Torralba · Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation</p>
+    <p>Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation · Sensitivity Analysis · Report Exports</p>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -515,13 +515,13 @@ with tab_overview:
     st.markdown("""
     <div class="placeholder-banner">
       ⚠️  <strong>Demo Mode</strong>  — All outputs are generated from placeholder calculations.
-      Once your CFD database is ready, replace the functions in <code>backend.py</code> with real lookups.
+      Once your CFD database is ready, replace the functions in <code>.py files</code> with real lookups.
       File naming convention: <code>{reactor_geometry}_{working_volume_m3}_{agitation_rpm}_{sparging_vvm}.xlsx</code>
     </div>
     """, unsafe_allow_html=True)
 
     if not st.session_state.results_ready:
-        st.info("👈  Configure parameters in the sidebar and click **▶ Run Simulation** to begin.")
+        st.info("Configure parameters in the sidebar and click **▶ Run Simulation** to begin.")
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("""
@@ -631,7 +631,7 @@ with tab_hydro:
     st.markdown("""
     <div class="placeholder-banner">
       ⚠️  Velocity field is a synthetic placeholder. Replace <code>simulate_velocity_field()</code> in
-      <code>backend.py</code> with the CFD-derived matrix from your COMSOL .xlsx files.
+      <code>.py files</code> with the CFD-derived matrix from your COMSOL .xlsx files.
     </div>
     """, unsafe_allow_html=True)
 
@@ -1019,6 +1019,6 @@ with tab_export:
 st.markdown("""
 <div class="footer">
   NIIMBL Bioreactor Digital Twin · Built with Streamlit ·
-  <em>All outputs in demo mode are placeholders — replace backend functions with real CFD data once database is available.</em>
+  <em>All outputs in demo mode are placeholders. · Alexa Q. Xiang ("Azzy") & Ashley Torralba © 2026 · In collaboration of Ohio State University, Texas Tech, and Johns Hopkins.</em>
 </div>
 """, unsafe_allow_html=True)
