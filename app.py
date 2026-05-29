@@ -525,18 +525,18 @@ with tab_overview:
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("""
-            **What this GUI simulates:**
-            - Hydrodynamics (velocity field, mixing zones, power input)
-            - Cell kinetics (growth, viability, substrate, titer)
+            **Available simulations**
+            - Hydrodynamics (velocity field and mixing zones; power input)
+            - Cell kinetics (growth and viability; substrate and titer)
             - Glycosylation profiles (G0F, G1F, G2F, Man5)
-            - Zone classification (well-mixed, transition, stagnant/anaerobic)
+            - Zone classification (well-mixed, transition, stagnant, and anaerobic zones)
             - Residence time distributions
             """)
         with col2:
             st.markdown("""
-            **Inputs accepted:**
-            - Reactor geometry (tank, impeller, sparger)
-            - Operating conditions (DO, pH, temperature, rpm)
+            **Accepted inputs**
+            - Reactor geometry (specifically tank/impeller/sparger)
+            - Operating conditions (DO, pH, temperature, and rpm)
             - CFD outputs from COMSOL (.xlsx upload)
             - Cell & media specifications
             """)
