@@ -168,7 +168,7 @@ st.markdown("""
 with st.sidebar:
     st.image("NIIMBL (without text).png", use_container_width = True)
     st.markdown("## Bioreactor Simulation")
-    st.caption("v1.0 · Alexa Q. Xiang ("Azzy") & Ashley Torralba © 2026")
+    st.caption("v1.0 · Alexa Q. Xiang ('Azzy') & Ashley Torralba © 2026")
     st.divider()
 
     # ── 1. Reactor Mode ──────────────────────────────────
@@ -1019,6 +1019,6 @@ with tab_export:
 st.markdown("""
 <div class="footer">
   NIIMBL Bioreactor Digital Twin · Built with Streamlit ·
-  <em>All outputs in demo mode are placeholders. · Alexa Q. Xiang ("Azzy") & Ashley Torralba © 2026 · In collaboration of Ohio State University, Texas Tech, and Johns Hopkins.</em>
+  <em>All outputs in demo mode are placeholders. · Alexa Q. Xiang ('Azzy') & Ashley Torralba © 2026 · In collaboration of Ohio State University, Texas Tech, and Johns Hopkins.</em>
 </div>
 """, unsafe_allow_html=True)
