@@ -248,6 +248,18 @@ with st.sidebar:
         start_vol_frac = st.slider("Starting volume fraction (%)", 0, 100, 30)
         end_vol_frac = st.slider("End volume fraction (%)", 0, 100, 80)
 
+        st.caption("Gas composition (%):")
+        gas_1, gas_2, gas_3 = st.columns(3)
+        with gas_1:
+            carbon_dioxide_percent = st.number_input("CO₂ (%)", min_value = 0.00, max_value = 100.00, value = 1.00, step = 0.05, format="%.2f")
+        with gas_2:
+            oxygen_percent = st.number_input("O₂ (%)", min_value = 0.00, max_value = 100.00, value = 21.00, step = 0.05, format="%.2f")
+        with gas_3:
+            nitrogen_percent = st.number_input("N₂ (%)", min_value = 0.00, max_value = 100.00, value = 78.00, step = 0.05, format="%.2f")
+
+        total_gas = carbon_dioxide_percent + oxygen_percent + nitrogen_percent
+        st.caption(f"Total: {total_gas: .2f}%")
+
     # ── 6. Cell & Media Specifications ─────────────────────────────
     with st.expander("⑥ Cell & Media Specifications", expanded=False):
         molar_volume_pg = st.number_input("Molar volume (pg/cell)", min_value=0.0, value=2.0, step=0.1)
