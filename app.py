@@ -200,8 +200,15 @@ with st.sidebar:
 
         st.caption("Impeller z-positions (m):")
         impeller_positions = []
+        impeller_types = []
         for i in range(int(n_impellers)):
-            z_position = st.number_input(f"Impeller {i + 1} - z (m)", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}")
+            st.caption(f"Impeller {i + 1}:")
+            column_type, column_z_position = st.columns(2)
+            with column_type:
+                impeller_type = st.selectionbox("Impeller type:", ["Rushton", "Pitched blade", "Segment"], key = f"impeller_type_{i}"))
+            with column_z_position:
+                z_position = st.number_input(f"Z-position (m):", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}")
+            impeller_types.append(impeller_type)
             impeller_positions.append(z_position)
 
         off_center = st.checkbox("Off-center mounting?", value = False)
@@ -262,8 +269,8 @@ with st.sidebar:
 
     # ── 6. Cell & Media Specifications ─────────────────────────────
     with st.expander("⑥ Cell & Media Specifications", expanded=False):
-        molar_volume_pg = st.number_input("Molar volume (pg/cell)", min_value=0.0, value=2.0, step=0.1)
-        number_density = st.number_input("Number density (mol/m³)", min_value=0.0, value=1e6, step=1e5, format="%.0f")
+        molar_volume_pg = st.number_input("Molar volume (µm³/cell)", min_value=0.0, value=2.0, step=0.1)
+        number_density = st.number_input("Initial viable cell density (×10⁶ cells/mL)", min_value=0.0, value=1.0, step=0.5, format="%.2f")
         media_viscosity = st.number_input("Media viscosity (mPa·s)", min_value=0.1, value=1.0, step=0.1)
         pluronic_present = st.checkbox("Pluronic present?", value=False)
         antifoam_present = st.checkbox("Antifoam present?", value=True)
