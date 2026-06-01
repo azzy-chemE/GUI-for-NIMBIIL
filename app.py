@@ -205,7 +205,7 @@ with st.sidebar:
             st.caption(f"Impeller {i + 1}:")
             column_type, column_z_position = st.columns(2)
             with column_type:
-                impeller_type = st.selectionbox("Impeller type:", ["Rushton", "Pitched blade", "Segment"], key = f"impeller_type_{i}"))
+                impeller_type = st.selectionbox("Impeller type:", ["Rushton", "Pitched blade", "Segment"], key = f"impeller_type_{i}")
             with column_z_position:
                 z_position = st.number_input(f"Z-position (m):", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}")
             impeller_types.append(impeller_type)
