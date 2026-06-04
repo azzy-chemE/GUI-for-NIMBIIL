@@ -242,7 +242,7 @@ with st.sidebar:
         air_flow_vvm = st.number_input("Air flow rate (vvm)", min_value=0.0, value=0.1, step=0.01, format="%.3f")
 
     # ── 5. Process Conditions ─────────────────────────────
-with st.expander("⑤ Process Conditions", expanded=False):
+    with st.expander("⑤ Process Conditions", expanded=False):
         culture_mode = st.selectbox(
             "Culture mode",
             ["Batch", "Fed-batch", "Perfusion"],
