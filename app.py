@@ -177,10 +177,6 @@ with st.sidebar:
             "Reactor type",
             ["Cytiva XCellerex (XDR)®", "Sartorius Flexsafe STR bags®", "Sartorius Ambr Reactors®"],
         )
-        culture_mode = st.selectbox(
-            "Culture mode",
-            ["Fed-batch", "Perfusion", "Batch"],
-        )
         cell_type = st.selectbox(
             "Cell type",
             ["CHO (Chinese Hamster Ovary)", "HEK 293", "NS0", "Vero", "Custom"],
