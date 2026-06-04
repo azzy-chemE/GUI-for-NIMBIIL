@@ -242,14 +242,31 @@ with st.sidebar:
         air_flow_vvm = st.number_input("Air flow rate (vvm)", min_value=0.0, value=0.1, step=0.01, format="%.3f")
 
     # ── 5. Process Conditions ─────────────────────────────
-    with st.expander("⑤ Process Conditions", expanded=False):
-        working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f")
+with st.expander("⑤ Process Conditions", expanded=False):
+        culture_mode = st.selectbox(
+            "Culture mode",
+            ["Batch", "Fed-batch", "Perfusion"],
+            index=0,
+        )
+
         total_volume = st.number_input("Total reactor volume (m³)", min_value=0.001, value=2.5, step=0.1, format="%.3f")
+
+        if culture_mode == "Batch":
+            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            start_working_volume = working_volume
+            end_working_volume   = working_volume
+        elif culture_mode == "Fed-batch":
+            start_working_volume = st.number_input("Start working volume (m³)", min_value=0.001, value=1.2, step=0.1, format="%.3f")
+            end_working_volume   = st.number_input("End working volume (m³)",   min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            working_volume = end_working_volume  # end volume used for downstream calculations
+        else:  # Perfusion
+            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            start_working_volume = working_volume
+            end_working_volume   = working_volume
+
         DO_setpoint = st.number_input("DO setpoint (% sat)", min_value=0.0, max_value=100.0, value=40.0, step=5.0)
         pH_setpoint = st.number_input("pH setpoint", min_value=6.0, max_value=8.0, value=7.0, step=0.05, format="%.2f")
         temperature_C = st.number_input("Temperature (°C)", min_value=20.0, max_value=40.0, value=37.0, step=0.5)
-        start_vol_frac = st.slider("Starting volume fraction (%)", 0, 100, 30)
-        end_vol_frac = st.slider("End volume fraction (%)", 0, 100, 80)
 
         st.caption("Gas composition (%):")
         gas_1, gas_2, gas_3 = st.columns(3)
@@ -276,8 +293,26 @@ with st.sidebar:
 
     # ── 7. Simulation Settings ────────────────────────────
     with st.expander("⑦ Simulation Settings", expanded=False):
-        total_time_hr = st.number_input("Total simulation time (hr)", min_value=1.0, value=240.0, step=12.0)
-        dt_hr = st.number_input("Time step (hr)", min_value=0.05, value=1.0, step=0.25)
+        time_unit = st.radio("Time unit", ["Hours (hr)", "Days (d)"], horizontal=True)
+
+        if time_unit == "Hours (hr)":
+            total_time_hr = st.number_input("Culture duration (hr)", min_value=1.0, value=240.0, step=12.0)
+            sampling_frequency_hr = st.number_input("Sampling frequency (hr)", min_value=0.5, value=24.0, step=0.5)
+            dt_hr = st.number_input("Simulation time step (hr)", min_value=0.05, value=1.0, step=0.25)
+        else:
+            total_time_d = st.number_input("Culture duration (d)", min_value=0.1, value=10.0, step=0.5)
+            total_time_hr = total_time_d * 24.0  # converted to hr for all downstream calculations
+
+            sampling_frequency_d = st.number_input("Sampling frequency (d)", min_value=0.1, value=1.0, step=0.5)
+            sampling_frequency_hr = sampling_frequency_d * 24.0
+
+            dt_d = st.number_input("Simulation time step (d)", min_value=0.001, value=round(1.0/24, 3), step=0.01, format="%.3f")
+            dt_hr = dt_d * 24.0
+
+        sampling_volume_mL = st.number_input(
+            "Sampling volume (mL)", min_value=0.1, value=5.0, step=0.5, format="%.1f"
+        )  # SI equivalent: sampling_volume_mL × 1e-6 m³
+
         n_compartments = st.number_input("Number of compartments", min_value=1, value=50, step=5)
         hydrodynamics_src = st.selectbox(
             "Hydrodynamics data source",
