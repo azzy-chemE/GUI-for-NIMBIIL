@@ -350,10 +350,10 @@ with st.sidebar:
     # ── 8. Feed Schedule ────────────────────────────
     with st.expander("⑧ Feeding Schedule", expanded = False):
         st.caption("Upload feeding schedule (.xlsx):")
-        st.info("**Required columns** — your file must include:\n"
-                "— 'Time (h)' — timepoints in ascending order\n"
-                "— 'cell.Fin (L/h)' — inlet flow rate\n"
-                "— 'cell.Fout (L/h)' — outlet/bleed flow rate\n\n"
+        st.info("**Required columns** — your file must include:
+                'Time (h)' — timepoints in ascending order
+                'cell.Fin (L/h)' — inlet flow rate
+                'cell.Fout (L/h)' — outlet/bleed flow rate\n\n"
                 "Any additional columns (e.g. 'conc_feed_Gal (mM)', 'conc_feed_Urd (mM)') are read automatically as feed components.")
         feed_file = st.file_uploader("Feed schedule (.xlsx)", type = ["xlsx"], key = "feed_schedule")
         if feed_file is not None:
