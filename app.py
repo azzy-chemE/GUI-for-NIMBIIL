@@ -163,12 +163,37 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
+#  FEED SCHEDULE VALIDATION
+# ══════════════════════════════════════════════════════════
+feed_columns = {"Time": "Time (h)",
+                "fin": "cell.Fin (L/h)",
+                "fout": "cell.Fout (L/h)"}
+
+feed_schedule_data = {"Time (h)": float,
+                      "cell.Fin (L/h)": float,
+                      "cell.Fout (L/h)": float}
+
+def validate_feed_schedule(df, feed_format):
+    required_columns = list(feed_format.keys())
+    for column in required_columns:
+        if column not in df.columns:
+            return False, f"Missing required column(s): {column}"
+        if not pd.api.types.is_numeric_dtype(df[column]):
+            return False, f"Column(s) '{column}' must be numeric."
+    if not df["Time (h)"].is_monotonic_increasing:
+        return False, f"Column(s) 'Time (h)' must be in ascending order."
+    for column in df.columns:
+        if df[column].isnull().any():
+            return False, f"Column(s) '{column}' has empty cells."
+    return True, "Valid feeding schedule."
+
+# ══════════════════════════════════════════════════════════
 #  SIDEBAR  — all inputs
 # ══════════════════════════════════════════════════════════
 with st.sidebar:
     st.image("NIIMBL (without text).png", use_container_width = True)
     st.markdown("## Bioreactor Simulation")
-    st.caption("v1.0 · Alexa Q. Xiang ('Azzy') & Ashley Torralba © 2026")
+    st.caption("v1.0 · Alexa Q. Xiang ('Azzy') & Ashley Nicole F. Torralba © 2026")
     st.divider()
 
     # ── 1. Reactor Mode ──────────────────────────────────
@@ -322,6 +347,37 @@ with st.sidebar:
             cfd_file = st.file_uploader("CFD data (.xlsx)", type=["xlsx"], key="cfd")
         sensitivity_analysis = st.checkbox("Enable sensitivity analysis", value=False)
 
+    # ── 8. Feed Schedule ────────────────────────────
+    with st.expander("⑧ Feeding Schedule", expanded = False):
+        st.caption("Upload feeding schedule (.xlsx):")
+        st.info("**Required columns** — your file must include:\n"
+                "— 'Time (h)' — timepoints in ascending order\n"
+                "— 'cell.Fin (L/h)' — inlet flow rate\n"
+                "— 'cell.Fout (L/h)' — outlet/bleed flow rate\n\n"
+                "Any additional columns (e.g. 'conc_feed_Gal (mM)', 'conc_feed_Urd (mM)') are read automatically as feed components.")
+        feed_file = st.file_uploader("Feed schedule (.xlsx)", type = ["xlsx"], key = "feed_schedule")
+        if feed_file is not None:
+            feed_df = pd.read_excel(feed_file)
+            is_valid, message = validate_feed_schedule(feed_df, feed_schedule_data)
+            if is_valid:
+                required = list(feed_columns.values())
+                component_columns = []
+                for column in feed_df.columns:
+                    if column not in required:
+                        component_columns.append(column)
+                if len(component_columns) > 0:
+                    components_detected = ", ".join(component_columns)
+                else:
+                    components_detected = "none"
+                st.success(f"Loaded {len(feed_df)} feed events. "
+                           f"Components detected: {components_detected}")
+                st.session_state.feed_df = feed_df
+            else:
+                st.error(f"Invalid format: {message}")
+                st.session_state.feed_df = None
+        else:
+            st.session_state.feed_df = None
+    
     st.divider()
     run_sim = st.button("▶  Run Simulation", use_container_width=True)
 
