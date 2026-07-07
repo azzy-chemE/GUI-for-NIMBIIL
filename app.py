@@ -464,7 +464,7 @@ with st.sidebar:
 st.markdown("""
 <div class="page-header">
   <div>
-    <h1>Bioreactor Digital Twin</h1>
+    <h1>The CHOMatrix</h1>
     <p>Compartment Model · Hydrodynamics · Cell Kinetics · Glycosylation · Sensitivity Analysis · Report Exports</p>
   </div>
 </div>
@@ -1201,7 +1201,7 @@ with tab_export:
 # ── Footer ─────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="footer">
-  NIIMBL Bioreactor Digital Twin · Built with Streamlit ·
+  NIIMBL The CHOMatrix · Built with Streamlit ·
   <em>All outputs in demo mode are placeholders. · Alexa Q. Xiang ('Azzy') & Ashley Torralba © 2026 · In collaboration of Ohio State University, Texas Tech, and Johns Hopkins.</em>
 </div>
 """, unsafe_allow_html=True)
