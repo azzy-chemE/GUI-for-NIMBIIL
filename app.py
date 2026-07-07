@@ -40,6 +40,7 @@ st.markdown("""
     --warn:      #D4713A;
     --border:    #C8DAD7;
     --muted:     #6B8A85;
+    --red:       #D44B2A;
   }
 
   html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
@@ -73,6 +74,9 @@ st.markdown("""
   [data-testid="stSidebar"] .stCheckbox label,
   [data-testid="stSidebar"] .stCheckbox label p,
   [data-testid="stSidebar"] .stCheckbox span { color: #A8C8C3 !important; }
+
+  .label-connected {color: #12A896 !important; font-size: 0.78rem !important; letter spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px;}
+  .label-not-connected {color: #D44B2A !important; font-size: 0.78rem !important; letter spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px;}
   
   /* main area */
   .main { background: var(--cream); }
@@ -196,43 +200,67 @@ with st.sidebar:
     st.caption("v1.0 · Alexa Q. Xiang ('Azzy') & Ashley Nicole F. Torralba © 2026")
     st.divider()
 
+    # ── 0. Warning ──────────────────────────────────
+    st.markdown("""
+    <div style = "background: #1E3A4A; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;">
+        <p style = "color: #D44B2A; font-size: 0.75rem; font-weight: 600; margin: 0 0 4px; ">⚠︎ Input Status</p>
+        <p style = "color: #A8C8C3; font-size: 0.72rem; margin: 0;">
+            <span style = "color: #12A896;" >●</span> Green - Connected to simulation<br>
+            <span style = "color: #D44B2A;" >●</span> Red - Not connected to backend yet
+        </p>
+    </div>
+    """, unsafe_allow_html = True)
+    
     # ── 1. Reactor Mode ──────────────────────────────────
     with st.expander("① Reactor Mode", expanded=True):
+        st.markdown('<p class = "label-not-connected">Reactor type</p>', unsafe_allow_html = True)
         reactor_type = st.selectbox(
             "Reactor type",
-            ["Cytiva XCellerex (XDR)®", "Sartorius Flexsafe STR bags®", "Sartorius Ambr Reactors®"],
+            ["Cytiva XCellerex (XDR)®", "Sartorius Flexsafe STR bags®", "Sartorius Ambr Reactors®"], label_visibility = "collapsed",
         )
+        st.markdown('<p class = "label-not-connected">Cell type</p>', unsafe_allow_html = True)
         cell_type = st.selectbox(
             "Cell type",
-            ["CHO (Chinese Hamster Ovary)", "HEK 293", "NS0", "Vero", "Custom"],
+            ["CHO (Chinese Hamster Ovary)", "HEK 293", "NS0", "Vero", "Custom"], label_visibility = "collapsed",
         )
 
     # ── 2. Tank Geometry ─────────────────────────────────
     with st.expander("② Tank Geometry", expanded=False):
-        tank_height = st.number_input("Tank height (m)", min_value=0.1, value=3.5, step=0.1, format="%.2f")
-        tank_diameter = st.number_input("Inner diameter (m)", min_value=0.1, value=1.5, step=0.1, format="%.2f")
-        n_baffles = st.number_input("No. of baffles", min_value=0, value=4, step=1)
-        baffle_width = st.number_input("Baffle width (m)", min_value=0.0, value=0.15, step=0.01, format="%.3f")
+        st.markdown('<p class = "label-not-connected">Tank height (m)</p>', unsafe_allow_html = True)
+        tank_height = st.number_input("Tank height (m)", min_value=0.1, value=3.5, step=0.1, format="%.2f", label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-not-connected">Inner diameter (m)</p>', unsafe_allow_html = True)
+        tank_diameter = st.number_input("Inner diameter (m)", min_value=0.1, value=1.5, step=0.1, format="%.2f", label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-not-connected">No. of baffles</p>', unsafe_allow_html = True)
+        n_baffles = st.number_input("No. of baffles", min_value=0, value=4, step=1, label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-not-connected">Baffle width (m)</p>', unsafe_allow_html = True)
+        baffle_width = st.number_input("Baffle width (m)", min_value=0.0, value=0.15, step=0.01, format="%.3f", label_visibility = "collapsed",)
 
     # ── 3. Impeller ───────────────────────────────────────
     with st.expander("③ Impeller", expanded=False):
-        impeller_diameter = st.number_input("Impeller diameter (m)", min_value=0.05, value=0.6, step=0.05, format="%.2f")
-        n_impellers = st.number_input("No. of impellers", min_value=1, value=2, step=1)
-
+        st.markdown('<p class = "label-connected">Impeller diameter (m)</p>', unsafe_allow_html = True)
+        impeller_diameter = st.number_input("Impeller diameter (m)", min_value=0.05, value=0.6, step=0.05, format="%.2f", label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">No. of impellers</p>', unsafe_allow_html = True)
+        n_impellers = st.number_input("No. of impellers", min_value=1, value=2, step=1, label_visibility = "collapsed",)
+        
         st.caption("Impeller z-positions (m):")
         impeller_positions = []
         impeller_types = []
         for i in range(int(n_impellers)):
-            st.caption(f"Impeller {i + 1}:")
+            st.markdown(f'<p class = "label-not-connected">Impeller {i + 1} - type &amp; z-position</p>', unsafe_allow_html = True)
             column_type, column_z_position = st.columns(2)
             with column_type:
-                impeller_type = st.selectbox("Impeller type:", ["Rushton", "Pitched blade", "Segment"], key = f"impeller_type_{i}")
+                impeller_type = st.selectbox("Impeller type:", ["Rushton", "Pitched blade", "Segment"], key = f"impeller_type_{i}", label_visibility = "collapsed",)
             with column_z_position:
-                z_position = st.number_input(f"Z-position (m):", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}")
+                z_position = st.number_input(f"Z-position (m):", min_value = 0.0, value = 0.0, step = 0.05, format = "%.2f", key = f"impeller_z_{i}", label_visibility = "collapsed",)
             impeller_types.append(impeller_type)
             impeller_positions.append(z_position)
 
-        off_center = st.checkbox("Off-center mounting?", value = False)
+        st.markdown('<p class = "label-not-connected">Off-center mounting?</p>', unsafe_allow_html = True)
+        off_center = st.checkbox("Off-center mounting?", value = False, label_visibility = "collapsed",)
         if off_center:
             st.caption("Rotation axis direction (unit vector):")
             r1, r2, r3 = st.columns(3)
@@ -253,47 +281,70 @@ with st.sidebar:
         else:
             rotation_axis_x, rotation_axis_y, rotation_axis_z = 0.0, 0.0, 1.0
             base_point_x, base_point_y, base_point_z = 0.0, 0.0, 0.0
-        
-        power_number = st.number_input("Power number (Np)", min_value=0.1, value=5.0, step=0.1, format="%.1f")
-        agitation_rpm = st.number_input("Agitation speed (rpm)", min_value=0.0, value=80.0, step=5.0)
+
+        st.markdown('<p class = "label-connected">Power number (Np)</p>', unsafe_allow_html = True)
+        power_number = st.number_input("Power number (Np)", min_value=0.1, value=5.0, step=0.1, format="%.1f", label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-connected">Agitation speed (rpm)</p>', unsafe_allow_html = True)
+        agitation_rpm = st.number_input("Agitation speed (rpm)", min_value=0.0, value=80.0, step=5.0, label_visibility = "collapsed",)
 
     # ── 4. Sparger ────────────────────────────────────────
     with st.expander("④ Sparger", expanded=False):
+        st.markdown('<p class = "label-not-connected">Sparger type</p>', unsafe_allow_html = True)
         sparger_type = st.selectbox(
             "Sparger Type",
-            ["Drilled-hole", "Macroporous", "Microporous", "T-shaped"],
+            ["Drilled-hole", "Macroporous", "Microporous", "T-shaped"], label_visibility = "collapsed",
         )
-        sparger_diameter = st.number_input("Sparger diameter (m)", min_value=0.01, value=0.1, step=0.01, format="%.3f")
-        air_flow_vvm = st.number_input("Air flow rate (vvm)", min_value=0.0, value=0.1, step=0.01, format="%.3f")
+        
+        st.markdown('<p class = "label-not-connected">Sparger diameter (m)</p>', unsafe_allow_html = True)
+        sparger_diameter = st.number_input("Sparger diameter (m)", min_value=0.01, value=0.1, step=0.01, format="%.3f", label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-connected">Air flow rate (vvm)</p>', unsafe_allow_html = True)
+        air_flow_vvm = st.number_input("Air flow rate (vvm)", min_value=0.0, value=0.1, step=0.01, format="%.3f", label_visibility = "collapsed",)
 
     # ── 5. Process Conditions ─────────────────────────────
     with st.expander("⑤ Process Conditions", expanded=False):
+        st.markdown('<p class = "label-not-connected">Culture mode</p>', unsafe_allow_html = True)
         culture_mode = st.selectbox(
             "Culture mode",
             ["Batch", "Fed-batch", "Perfusion"],
-            index=0,
+            index=0, label_visibility = "collapsed",
         )
 
-        total_volume = st.number_input("Total reactor volume (m³)", min_value=0.001, value=2.5, step=0.1, format="%.3f")
+        st.markdown('<p class = "label-not-connected">Total reactor volume (m³)</p>', unsafe_allow_html = True)
+        total_volume = st.number_input("Total reactor volume (m³)", min_value=0.001, value=2.5, step=0.1, format="%.3f", label_visibility = "collapsed",)
 
         if culture_mode == "Batch":
-            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            st.markdown('<p class = "label-connected">Working volume (m³)</p>', unsafe_allow_html = True)
+            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f", label_visibility = "collapsed",)
+            
             start_working_volume = working_volume
             end_working_volume   = working_volume
         elif culture_mode == "Fed-batch":
-            start_working_volume = st.number_input("Start working volume (m³)", min_value=0.001, value=1.2, step=0.1, format="%.3f")
-            end_working_volume   = st.number_input("End working volume (m³)",   min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            st.markdown('<p class = "label-connected">Start working volume (m³)</p>', unsafe_allow_html = True)
+            start_working_volume = st.number_input("Start working volume (m³)", min_value=0.001, value=1.2, step=0.1, format="%.3f", label_visibility = "collapsed",)
+
+            st.markdown('<p class = "label-connected">End working volume (m³)</p>', unsafe_allow_html = True)
+            end_working_volume   = st.number_input("End working volume (m³)",   min_value=0.001, value=2.0, step=0.1, format="%.3f", label_visibility = "collapsed",)
+            
             working_volume = end_working_volume  # end volume used for downstream calculations
         else:  # Perfusion
-            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f")
+            st.markdown('<p class = "label-connected">Working volume (m³)</p>', unsafe_allow_html = True)
+            working_volume = st.number_input("Working volume (m³)", min_value=0.001, value=2.0, step=0.1, format="%.3f", label_visibility = "collapsed",)
+            
             start_working_volume = working_volume
             end_working_volume   = working_volume
 
-        DO_setpoint = st.number_input("DO setpoint (% sat)", min_value=0.0, max_value=100.0, value=40.0, step=5.0)
-        pH_setpoint = st.number_input("pH setpoint", min_value=6.0, max_value=8.0, value=7.0, step=0.05, format="%.2f")
-        temperature_C = st.number_input("Temperature (°C)", min_value=20.0, max_value=40.0, value=37.0, step=0.5)
+        st.markdown('<p class = "label-connected">DO setpoint (% sat)</p>', unsafe_allow_html = True)
+        DO_setpoint = st.number_input("DO setpoint (% sat)", min_value=0.0, max_value=100.0, value=40.0, step=5.0, label_visibility = "collapsed",)
 
-        st.caption("Gas composition (%):")
+        st.markdown('<p class = "label-not-connected">pH setpoint</p>', unsafe_allow_html = True)
+        pH_setpoint = st.number_input("pH setpoint", min_value=6.0, max_value=8.0, value=7.0, step=0.05, format="%.2f", label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-connected">Temperature (°C)</p>', unsafe_allow_html = True)
+        temperature_C = st.number_input("Temperature (°C)", min_value=20.0, max_value=40.0, value=37.0, step=0.5, label_visibility = "collapsed",)
+
+        st.markdown('<p class = "label-not-connected">Gas composition (%)</p>', unsafe_allow_html = True)
         gas_1, gas_2, gas_3 = st.columns(3)
         with gas_1:
             carbon_dioxide_percent = st.number_input("CO₂ (%)", min_value = 0.00, max_value = 100.00, value = 1.00, step = 0.05, format="%.2f")
@@ -307,45 +358,70 @@ with st.sidebar:
 
     # ── 6. Cell & Media Specifications ─────────────────────────────
     with st.expander("⑥ Cell & Media Specifications", expanded=False):
-        molar_volume_pg = st.number_input("Molar volume (µm³/cell)", min_value=0.0, value=2.0, step=0.1)
-        number_density = st.number_input("Initial viable cell density (×10⁶ cells/mL)", min_value=0.0, value=1.0, step=0.5, format="%.2f")
-        media_viscosity = st.number_input("Media viscosity (mPa·s)", min_value=0.1, value=1.0, step=0.1)
-        pluronic_present = st.checkbox("Pluronic present?", value=False)
-        antifoam_present = st.checkbox("Antifoam present?", value=True)
+        st.markdown('<p class = "label-not-connected">Molar volume (µm³/cell)</p>', unsafe_allow_html = True)
+        molar_volume_pg = st.number_input("Molar volume (µm³/cell)", min_value=0.0, value=2.0, step=0.1, label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">Initial viable cell density (×10⁶ cells/mL)</p>', unsafe_allow_html = True)
+        number_density = st.number_input("Initial viable cell density (×10⁶ cells/mL)", min_value=0.0, value=1.0, step=0.5, format="%.2f", label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">Media viscosity (mPa·s)</p>', unsafe_allow_html = True)
+        media_viscosity = st.number_input("Media viscosity (mPa·s)", min_value=0.1, value=1.0, step=0.1, label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">Pluronic present?</p>', unsafe_allow_html = True)
+        pluronic_present = st.checkbox("Pluronic present?", value=False, label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">Antifoam present?</p>', unsafe_allow_html = True)
+        antifoam_present = st.checkbox("Antifoam present?", value=True, label_visibility = "collapsed",)
+        
         st.caption("Upload cell-specific parameters:")
         cell_params_file = st.file_uploader("Cell Parameters (.xlsx)", type=["xlsx"], key="cell_params")
         media_comp_file = st.file_uploader("Media composition (.xlsx)", type=["xlsx"], key="media_comp")
 
     # ── 7. Simulation Settings ────────────────────────────
     with st.expander("⑦ Simulation Settings", expanded=False):
-        time_unit = st.radio("Time unit", ["Hours (hr)", "Days (d)"], horizontal=True)
+        st.markdown('<p class = "label-not-connected">Time unit</p>', unsafe_allow_html = True)
+        time_unit = st.radio("Time unit", ["Hours (hr)", "Days (d)"], horizontal=True, label_visibility = "collapsed",)
 
         if time_unit == "Hours (hr)":
-            total_time_hr = st.number_input("Culture duration (hr)", min_value=1.0, value=240.0, step=12.0)
-            sampling_frequency_hr = st.number_input("Sampling frequency (hr)", min_value=0.5, value=24.0, step=0.5)
-            dt_hr = st.number_input("Simulation time step (hr)", min_value=0.05, value=1.0, step=0.25)
+            st.markdown('<p class = "label-connected">Culture duration (hr)</p>', unsafe_allow_html = True)
+            total_time_hr = st.number_input("Culture duration (hr)", min_value=1.0, value=240.0, step=12.0, label_visibility = "collapsed",)
+            
+            st.markdown('<p class = "label-not-connected">Sampling frequency (hr)</p>', unsafe_allow_html = True)
+            sampling_frequency_hr = st.number_input("Sampling frequency (hr)", min_value=0.5, value=24.0, step=0.5, label_visibility = "collapsed",)
+            
+            st.markdown('<p class = "label-connected">Simulation time step (hr)</p>', unsafe_allow_html = True)
+            dt_hr = st.number_input("Simulation time step (hr)", min_value=0.05, value=1.0, step=0.25, label_visibility = "collapsed",)
         else:
-            total_time_d = st.number_input("Culture duration (d)", min_value=0.1, value=10.0, step=0.5)
+            st.markdown('<p class = "label-connected">Culture duration (d)</p>', unsafe_allow_html = True)
+            total_time_d = st.number_input("Culture duration (d)", min_value=0.1, value=10.0, step=0.5, label_visibility = "collapsed",)
             total_time_hr = total_time_d * 24.0  # converted to hr for all downstream calculations
-
-            sampling_frequency_d = st.number_input("Sampling frequency (d)", min_value=0.1, value=1.0, step=0.5)
+            
+            st.markdown('<p class = "label-not-connected">Sampling frequency (d)</p>', unsafe_allow_html = True)
+            sampling_frequency_d = st.number_input("Sampling frequency (d)", min_value=0.1, value=1.0, step=0.5, label_visibility = "collapsed",)
             sampling_frequency_hr = sampling_frequency_d * 24.0
-
-            dt_d = st.number_input("Simulation time step (d)", min_value=0.001, value=round(1.0/24, 3), step=0.01, format="%.3f")
+            
+            st.markdown('<p class = "label-connected">Simulation time step (d)</p>', unsafe_allow_html = True)
+            dt_d = st.number_input("Simulation time step (d)", min_value=0.001, value=round(1.0/24, 3), step=0.01, format="%.3f", label_visibility = "collapsed",)
             dt_hr = dt_d * 24.0
-
+        
+        st.markdown('<p class = "label-not-connected">Sampling volume (mL)</p>', unsafe_allow_html = True)
         sampling_volume_mL = st.number_input(
-            "Sampling volume (mL)", min_value=0.1, value=5.0, step=0.5, format="%.1f"
+            "Sampling volume (mL)", min_value=0.1, value=5.0, step=0.5, format="%.1f", label_visibility = "collapsed",
         )  # SI equivalent: sampling_volume_mL × 1e-6 m³
-
-        n_compartments = st.number_input("Number of compartments", min_value=1, value=50, step=5)
+        
+        st.markdown('<p class = "label-connected">Number of compartments</p>', unsafe_allow_html = True)
+        n_compartments = st.number_input("Number of compartments", min_value=1, value=50, step=5, label_visibility = "collapsed",)
+        
+        st.markdown('<p class = "label-not-connected">Hydrodynamics data source</p>', unsafe_allow_html = True)
         hydrodynamics_src = st.selectbox(
             "Hydrodynamics data source",
-            ["Upload CFD output (.xlsx)", "Use placeholder (demo)", "Connect OSU CFD outputs"],
+            ["Upload CFD output (.xlsx)", "Use placeholder (demo)", "Connect OSU CFD outputs"], label_visibility = "collapsed",
         )
         if hydrodynamics_src == "Upload CFD output (.xlsx)":
             cfd_file = st.file_uploader("CFD data (.xlsx)", type=["xlsx"], key="cfd")
-        sensitivity_analysis = st.checkbox("Enable sensitivity analysis", value=False)
+
+        st.markdown('<p class = "label-not-connected">Enable sensitivity analysis</p>', unsafe_allow_html = True)
+        sensitivity_analysis = st.checkbox("Enable sensitivity analysis", value=False, label_visibility = "collapsed",)
 
     # ── 8. Feed Schedule ────────────────────────────
     with st.expander("⑧ Feeding Schedule", expanded = False):
@@ -355,6 +431,7 @@ with st.sidebar:
                 "'cell.Fin (L/h)' — inlet flow rate,\n"
                 "'cell.Fout (L/h)' — outlet/bleed flow rate.\n\n"
                 "Any additional columns (e.g. 'conc_feed_Gal (mM)', 'conc_feed_Urd (mM)') are read automatically as feed components.")
+        st.markdown('<p class = "label-not-connected">Feed schedule (.xlsx):</p>', unsafe_allow_html = True)
         feed_file = st.file_uploader("Feed schedule (.xlsx)", type = ["xlsx"], key = "feed_schedule")
         if feed_file is not None:
             feed_df = pd.read_excel(feed_file)
