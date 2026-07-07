@@ -1,5 +1,5 @@
 """
-NIIMBL Bioreactor Digital Twin GUI
+NIIMBL The CHOMatrix GUI
 Run: streamlit run app.py
 """
 
@@ -19,7 +19,7 @@ from datetime import datetime
 
 # ── Page config (must be first) ──────────────────────────────────────────────
 st.set_page_config(
-    page_title="NIIMBL · Bioreactor Digital Twin",
+    page_title="NIIMBL · The CHOMatrix",
     page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded",
